@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '@/utils/request'
 import type { TaskParams, GenerateResult } from '@/types'
 import { generateRandomId } from '@/utils'
 
