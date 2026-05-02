@@ -1,13 +1,15 @@
 <template>
-  <div id="app">
-    <h1 class="text-3xl font-bold text-blue-600 text-center mt-10">
-      AI绘画工具初始化成功
-    </h1>
-    <el-button type="primary" class="mx-auto block mt-5">
-      Element Plus 测试按钮
-    </el-button>
-  </div>
+  <Layout />
 </template>
 
 <script setup lang="ts">
+import Layout from '@/components/Layout.vue'
+import { useAppStore } from '@/store/app'
+import { onMounted } from 'vue'
+
+const store = useAppStore()
+
+onMounted(() => {
+  store.init()
+})
 </script>
