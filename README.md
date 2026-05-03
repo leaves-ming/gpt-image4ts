@@ -43,6 +43,22 @@ npm run build
 ```
 构建产物输出到`dist`目录，可直接部署到任意静态托管服务（Nginx/Vercel/Netlify等）
 
+### 5. GitHub Pages 一键部署
+本项目已内置一键部署到GitHub Pages能力：
+1. **修改基础路径**：修改`vite.config.ts`中的`base`字段为你的仓库名：
+   ```ts
+   base: '/你的仓库名/' // 例如仓库名为ai-draw则填'/ai-draw/'，使用自定义域名则填'/'
+   ```
+2. **执行部署命令**：
+   ```bash
+   npm run deploy
+   ```
+   自动完成构建并将产物推送到`gh-pages`分支
+3. **仓库配置**：进入GitHub仓库`Settings → Pages`：
+   - 源选择`Deploy from a branch`
+   - 分支选择`gh-pages`，目录选`/ (root)`
+   - 保存后等待2-3分钟即可访问：`https://你的用户名.github.io/你的仓库名/`
+
 ## 📁 目录结构
 ```
 ├── src

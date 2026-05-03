@@ -6,6 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 
 export default defineConfig({
+  base: '/gpt-image-playground-vue/', // 改成你的GitHub仓库名，前后加斜杠
   plugins: [
     vue(),
     AutoImport({
