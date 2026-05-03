@@ -1,14 +1,14 @@
 <template>
-  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <div class="lg:col-span-1 space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">提示词</h3>
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 transition-all hover:shadow-2xl hover:scale-[1.01] duration-300">
+        <h3 class="text-lg font-semibold mb-4 text-slate-900 dark:text-white font-heading">提示词</h3>
         <el-input v-model="params.prompt" type="textarea" :rows="4" placeholder="请输入描述你想要生成的图片内容" class="mb-3" />
         <el-input v-model="params.negativePrompt" type="textarea" :rows="2" placeholder="负向提示词，描述你不想要的内容" />
       </div>
 
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">图生图</h3>
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 transition-all hover:shadow-2xl hover:scale-[1.01] duration-300">
+        <h3 class="text-lg font-semibold mb-4 text-slate-900 dark:text-white font-heading">图生图</h3>
         <el-upload
           v-model:file-list="uploadedImages"
           list-type="picture-card"
@@ -19,11 +19,11 @@
         >
           <el-icon><Plus /></el-icon>
         </el-upload>
-        <p class="text-sm text-gray-500 dark:text-gray-400">上传参考图片将自动切换为图生图模式</p>
+        <p class="text-sm text-slate-500 dark:text-slate-400">上传参考图片将自动切换为图生图模式</p>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">参数配置</h3>
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 transition-all hover:shadow-2xl hover:scale-[1.01] duration-300">
+        <h3 class="text-lg font-semibold mb-4 text-slate-900 dark:text-white font-heading">参数配置</h3>
         <el-form label-width="80px">
           <el-form-item label="尺寸">
             <el-select v-model="size" class="w-full">
@@ -49,30 +49,30 @@
         </el-form>
       </div>
 
-      <el-button type="primary" size="large" class="w-full" :loading="loading" @click="submitGenerate">
+      <el-button type="primary" size="large" class="w-full h-12 text-lg font-medium rounded-xl shadow-lg hover:shadow-xl transition-all" :loading="loading" @click="submitGenerate">
         生成图片
       </el-button>
     </div>
 
     <div class="lg:col-span-2 space-y-6">
-      <div v-if="currentResult" class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">生成结果</h3>
+      <div v-if="currentResult" class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
+        <h3 class="text-lg font-semibold mb-4 text-slate-900 dark:text-white font-heading">生成结果</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div v-for="(img, index) in currentResult.images" :key="index" class="group relative">
-            <img :src="img.startsWith('http') ? img : `data:image/png;base64,${img}`" class="w-full rounded-lg shadow" alt="生成图片" />
-            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
+          <div v-for="(img, index) in currentResult.images" :key="index" class="group relative cursor-pointer rounded-xl overflow-hidden shadow-lg">
+            <img :src="img.startsWith('http') ? img : `data:image/png;base64,${img}`" class="w-full rounded-xl transition-transform group-hover:scale-105 duration-300" alt="生成图片" />
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
               <el-button type="primary" size="small" @click="downloadImage(img, index)">下载</el-button>
             </div>
           </div>
         </div>
-        <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+        <div class="mt-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
           耗时: {{ currentResult.costTime }}ms | 种子: {{ currentResult.parameters.seed }}
         </div>
       </div>
 
-      <div v-else class="bg-white dark:bg-gray-800 rounded-lg shadow p-20 text-center">
-        <div class="text-gray-400 dark:text-gray-500 text-6xl mb-4">🎨</div>
-        <p class="text-gray-500 dark:text-gray-400">输入提示词点击生成按钮开始创作</p>
+      <div v-else class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-20 text-center">
+        <div class="text-slate-400 dark:text-slate-500 text-6xl mb-4">✨</div>
+        <p class="text-slate-500 dark:text-slate-400 text-lg font-medium">输入提示词点击生成按钮开始创作</p>
       </div>
     </div>
   </div>
